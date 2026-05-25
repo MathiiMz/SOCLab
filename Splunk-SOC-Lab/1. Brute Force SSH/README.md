@@ -61,6 +61,3 @@ True Positive
 - Restrict SSH access by IP/VPN
 - Disable password authentication
 - Monitor authentication anomalies
-
-## Screenshots
-Add Splunk screenshots here.
