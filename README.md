@@ -1,60 +1,104 @@
-# Cybersecurity Portfolio – Mathias Muñoz
+# Cybersecurity Portfolio – Mathías Muñoz
 
-Portafolio práctico orientado a ciberseguridad defensiva, con foco en monitoreo de seguridad, análisis de eventos, control de accesos e implementación de controles.
+Practical cybersecurity portfolio focused on defensive security, SOC operations and security monitoring in Linux environments.
 
-## Áreas trabajadas
-
-- SOC / SIEM (Splunk)
-- Detección y análisis de eventos
-- Linux logging y auditoría
-- IAM / RBAC / mínimo privilegio
-- Gobernanza y documentación de seguridad
-
-## Proyectos destacados
-
-### 1. SOC Lab – Splunk Detection Engineering
-Laboratorio práctico de detección y análisis de eventos en entorno Linux, utilizando Splunk como SIEM.
-
-**Incluye:**
-- Centralización de logs Linux
-- Detección de autenticaciones SSH sospechosas
-- Correlación de eventos de privilegios y procesos
-- Auditoría de ejecución de comandos con auditd
-- Dashboards y búsquedas SPL
-- Identificación de gaps de visibilidad
-
-Ir al proyecto:
-[splunk-soc-lab](./splunk-soc-lab)
+This repository documents hands-on projects related to SIEM operations, event analysis and detection engineering.
 
 ---
 
-### 2. IAM & Governance – RBAC / Access Control
-Caso práctico orientado a control de accesos, gobernanza de identidades y documentación de seguridad.
+# Main Project
 
-**Incluye:**
-- Modelo RBAC
-- Mínimo privilegio
-- Segregación de funciones
-- Enfoque operativo alineado a seguridad
+## 🔍 Splunk SOC Lab
 
-Ir al proyecto:
-[iam-governance](./iam-governance)
+Practical SOC laboratory developed using Splunk Enterprise for monitoring and investigation of security events in Linux systems.
+
+### Covered Scenarios
+
+1. Brute Force  
+2. Privilege Escalation  
+3. Suspicious Process Execution  
+4. DNS Visibility Gap  
+5. Suspicious Network Tool Execution
+
+### Technologies Used
+
+- Splunk Enterprise
+- Linux
+- SPL (Search Processing Language)
+- auditd
+- SSH Logs
+- Syslog
 
 ---
 
-## Perfil profesional
+# Additional Projects
 
-Analista de Ciberseguridad Junior con experiencia en control de accesos, gobernanza de identidades y análisis de eventos de seguridad. Interesado en roles de SOC, seguridad de la información, IAM y ciberseguridad defensiva.
+## 🛡️ CVEVault
 
-## Tecnologías y conocimientos
+REST API focused on vulnerability intelligence and CVE management.
 
-- Splunk (SPL)
+Technologies:
+- Python
+- FastAPI
+- REST APIs
+
+---
+
+## 🚨 SentinelOps
+
+SOC-oriented incident management backend developed with Laravel.
+
+Technologies:
+- Laravel
+- PHP
+- MySQL
+- Sanctum
+
+---
+
+# Technical Areas
+
+- SOC Operations
+- SIEM Monitoring
+- Detection Engineering
+- Threat Detection
+- Log Analysis
+- Linux Security Monitoring
+
+---
+
+# Technologies & Tools
+
+## Security
+- Splunk
 - Linux
 - auditd
-- SSH logs
-- Power Automate
-- Microsoft Entra ID
-- RBAC
-- ISO 27001
+- SIEM
 - MITRE ATT&CK
-- Python básico
+
+## Development
+- Python
+- PHP
+- Laravel
+- FastAPI
+- Git
+- REST APIs
+
+## Identity & Governance
+- RBAC
+- Microsoft Entra ID
+- Least Privilege
+- ISO 27001
+
+---
+
+# Professional Profile
+
+Junior Cybersecurity Analyst focused on defensive security, SOC monitoring and event analysis in Linux environments.
+
+Interested in:
+- SOC Analyst
+- Detection Engineering
+- Threat Monitoring
+- Security Operations
+- IAM & Governance
