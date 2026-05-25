@@ -1,4 +1,4 @@
-# Cybersecurity Portfolio – Mathías Muñoz
+# Cybersecurity Portfolio – Mathias Muñoz
 
 Practical cybersecurity portfolio focused on defensive security, SOC operations and security monitoring in Linux environments.
 
