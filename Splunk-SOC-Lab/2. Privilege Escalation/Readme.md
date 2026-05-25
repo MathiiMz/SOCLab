@@ -1,75 +1,59 @@
-# Detección en Splunk — Caso 02: Escalamiento de privilegios con sudo
+# Privilege Escalation Detection
 
-## Búsqueda base
+## Objective
+Detect privilege escalation activity through sudo execution on a Linux endpoint.
 
-``index=main sourcetype=Ubuntu-Victima "sudo:"``
+## Environment
+- Ubuntu Server
+- Splunk Enterprise
+- Linux authentication logs
 
-### Objetivo
-Visualizar eventos relacionados con uso de privilegios elevados mediante sudo.
+## Attack Simulation
+Privilege escalation activity was simulated using sudo commands executed from a standard user account.
 
-Detección de comandos ejecutados con privilegios
-``index=main sourcetype=Ubuntu-Victima "COMMAND="``
+## Data Source
+- `/var/log/auth.log`
+- sourcetype: `Ubuntu-Victima`
+- index: `main`
 
-### Objetivo
-Identificar comandos ejecutados con privilegios elevados dentro del sistema.
+## Detection Logic
 
-## Conteo por usuario
+### Sudo Activity Detection
 
-``index=main sourcetype=Ubuntu-Victima "sudo:"
+```spl
+index=main sourcetype=Ubuntu-Victima sudo
+```
+
+### Privileged Command Execution
+
+```spl
+index=main sourcetype=Ubuntu-Victima sudo
+| table _time host user _raw
+```
+
+### Frequency Analysis
+
+```spl
+index=main sourcetype=Ubuntu-Victima sudo
 | stats count by user
-| sort - count``
+```
 
-### Objetivo
-Determinar qué usuarios ejecutaron más acciones privilegiadas.
+## Findings
+- Successful sudo executions detected
+- Privileged commands executed by standard users
+- Activity consistent with privilege escalation behavior
 
-## Conteo temporal
+## MITRE ATT&CK
+- T1548 — Abuse Elevation Control Mechanism
 
-``index=main sourcetype=Ubuntu-Victima "sudo:"
-| timechart count``
+## Impact
+Potential unauthorized privileged access and system manipulation.
 
-### Objetivo
-Visualizar actividad de escalamiento de privilegios en el tiempo.
+## Classification
+True Positive
 
-### Hallazgos
-Se observaron ejecuciones de comandos mediante sudo.
-Fue posible identificar elevación de privilegios y sesiones asociadas.
-La visibilidad permitió reconstruir actividad administrativa y potencialmente sospechosa.
-
-### Clasificación
-Detección válida / actividad privilegiada observable
-
-### Valor analítico
-Este caso permitió practicar:
-  - monitoreo de privilegios
-  - análisis de elevación de permisos
-  - revisión de comandos administrativos
-  - diferenciación entre actividad legítima y sospechosa
-  - visibilidad de post-explotación
-
-### Limitaciones
-- Laboratorio controlado
-- Sin integración con PAM avanzado o EDR
-- Contexto limitado al host
-
-### Lecciones aprendidas
-- Los eventos de sudo son altamente relevantes para detectar abuso de privilegios.
-- El contexto del comando ejecutado es clave para distinguir administración legítima de actividad maliciosa.
-
-# Evidencia — Caso 02: Escalamiento de privilegios con sudo
-
-## Actividad simulada
-Se ejecutaron comandos privilegiados mediante sudo para generar trazabilidad asociada a elevación de permisos.
-
-## Evidencia observada
-- Los eventos fueron visibles en `auth.log`.
-- Splunk permitió identificar apertura de sesiones privilegiadas.
-- Fue posible observar comandos ejecutados bajo contexto root.
-
-## Evidencia recomendada en capturas
-- Eventos crudos de `sudo:`
-- Comandos con `COMMAND=`
-- Línea temporal de actividad
-- Tabla por usuario
-
-## Conclusión
-La telemetría permitió identificar correctamente eventos de escalamiento de privilegios y analizar su contexto operativo.
+## Recommendations
+- Restrict sudo permissions
+- Implement least privilege access
+- Monitor privileged command execution
+- Enable audit logging
