@@ -31,31 +31,6 @@ Practical SOC laboratory developed using Splunk Enterprise for monitoring and in
 
 ---
 
-# Additional Projects
-
-## 🛡️ CVEVault
-
-REST API focused on vulnerability intelligence and CVE management.
-
-Technologies:
-- Python
-- FastAPI
-- REST APIs
-
----
-
-## 🚨 SentinelOps
-
-SOC-oriented incident management backend developed with Laravel.
-
-Technologies:
-- Laravel
-- PHP
-- MySQL
-- Sanctum
-
----
-
 # Technical Areas
 
 - SOC Operations
