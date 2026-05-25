@@ -1,39 +1,66 @@
-# Caso 01 — Brute Force SSH
+# Brute Force SSH Detection
 
-## Resumen
-Se documenta la detección de múltiples intentos fallidos de autenticación SSH sobre un servidor Linux, simulando un escenario de acceso inicial mediante fuerza bruta.
+## Objective
+Detect repeated failed SSH authentication attempts against a Linux server using Splunk.
 
-## Objetivo
-Detectar patrones repetitivos de autenticación fallida y validar visibilidad operativa en Splunk a partir de logs de autenticación Linux.
+## Environment
+- Ubuntu Server
+- Splunk Enterprise
+- Linux auth logs
+- SSH service enabled
 
-## Escenario simulado
-Desde una máquina atacante se generaron múltiples intentos fallidos de acceso SSH contra la máquina víctima, con el fin de evaluar la capacidad de detección en el SIEM.
+## Attack Simulation
+Multiple failed SSH login attempts were generated from an attacker machine against the target Linux host to simulate brute force activity.
 
-## Fuente de datos
+## Data Source
 - `/var/log/auth.log`
-- Sourcetype: `Ubuntu-Victima`
-- Index: `main`
+- sourcetype: `Ubuntu-Victima`
+- index: `main`
 
-## Técnica observada
-- Intentos repetidos de autenticación fallida
-- Posible validación automatizada de credenciales
-- Actividad consistente con acceso inicial
+## Detection Logic
 
-## Resultado
-Se logró identificar:
-- usuario objetivo
-- dirección IP de origen
-- repetición temporal del patrón
-- volumen de intentos fallidos
+### Failed SSH Attempts
 
-## Impacto
-Riesgo de acceso no autorizado mediante compromiso o descubrimiento de credenciales válidas.
+```spl
+index=main sourcetype=Ubuntu-Victima "Failed password"
+| stats count by src,user
+| sort - count
+```
 
-## Clasificación
-**True Positive**
+### Authentication Timeline
 
-## Recomendaciones
-- Implementar controles contra fuerza bruta (ej. fail2ban)
-- Restringir acceso SSH por IP o VPN
-- Deshabilitar autenticación por contraseña cuando sea posible
-- Monitorear volumen de fallos por usuario e IP
+```spl
+index=main sourcetype=Ubuntu-Victima "Failed password"
+| timechart count
+```
+
+### Top Source IPs
+
+```spl
+index=main sourcetype=Ubuntu-Victima "Failed password"
+| stats count by src
+| sort - count
+```
+
+## Findings
+- Multiple failed authentication attempts detected
+- Repeated login failures from the same IP address
+- Pattern consistent with brute force activity
+
+## MITRE ATT&CK
+- T1110 — Brute Force
+
+## Impact
+Risk of unauthorized access through compromised credentials.
+
+## Classification
+True Positive
+
+## Recommendations
+- Implement fail2ban
+- Restrict SSH access by IP/VPN
+- Disable password authentication
+- Monitor authentication anomalies
+
+## Screenshots
+Add Splunk screenshots here.
